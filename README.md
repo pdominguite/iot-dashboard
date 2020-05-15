@@ -3,7 +3,7 @@ Dashboard designed in React JS using StyledComponents for IoT applications.
 
 # :computer: Preview
 
-![alt text]('/assets/screenshot.png' "Dashboard")
+![alt text](/assets/screenshot.png "Dashboard")
 
 # :rocket: Link
 
