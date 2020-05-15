@@ -1,10 +1,10 @@
 # IoT Dashboard
 Dashboard designed in React JS using StyledComponents for IoT applications.
 
-# :computer: Preview
+## :computer: Preview
 
 ![alt text](/assets/screenshot.png "Dashboard")
 
-# :rocket: Link
+## :rocket: Link
 
 Access this dashboard via this [link](https://thales-iot.netlify.app/).
