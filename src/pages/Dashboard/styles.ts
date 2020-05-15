@@ -145,14 +145,15 @@ export const Slider = styled.div`
   }
 
   .slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 60px;
 
     background: url(${Arrow}) no-repeat;
     background-color: #1974d2;
     background-position: center;
 
     border-radius: 5px;
+    border-color: transparent;
 
     cursor: pointer;
   }
