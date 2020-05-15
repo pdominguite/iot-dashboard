@@ -7,4 +7,4 @@ Dashboard designed in React JS using StyledComponents for IoT applications.
 
 ## :rocket: Link
 
-Access this dashboard via this [link](https://thales-iot.netlify.app/).
+Access the dashboard using this [link](https://thales-iot.netlify.app/).
