@@ -18,8 +18,7 @@ export default createGlobalStyle`
   }
 
   #root {
-    max-width: 960px;
-    min-width: 100vh;
+    min-width: 960px;
     min-height: 100vh;
     margin: 0 auto;
     padding: 40px 0px;
