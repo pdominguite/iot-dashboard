@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
+
 import { FiWind } from 'react-icons/fi';
 import { FaThermometerHalf } from 'react-icons/fa';
 import { RiDoorLockBoxLine } from 'react-icons/ri';
@@ -17,33 +18,10 @@ const Dashboard: React.FC = () => {
   const [temperature, setTemperature] = useState(10);
   const [humidity, setHumidity] = useState(10);
   const [air, setAir] = useState('Bom');
+
   const windowSlider = document.getElementById(
     'windowSlider',
   ) as HTMLInputElement;
-
-  mqttClient.on('message', (topic, message) => {
-    switch (topic) {
-      case '/temperature':
-        setTemperature(Number(Number(message).toFixed(1)));
-        break;
-      case '/humidity':
-        setHumidity(parseInt(message.toString(), 10));
-        break;
-      case '/air':
-        if (Number(message) < 0.33) setAir('Ruim');
-        else if (Number(message) > 0.66) setAir('Ruim');
-        else setAir('Boa');
-        break;
-      case '/light':
-        setLightStatus(message.toString() === '1');
-        break;
-      case '/window':
-        setWindowValue(parseInt(message.toString(), 10));
-        break;
-      default:
-        break;
-    }
-  });
 
   const clickHandler = useCallback(async () => {
     setLightStatus(!lightStatus);
@@ -55,7 +33,34 @@ const Dashboard: React.FC = () => {
     mqttClient.publish('/window', `${Number(windowLevel)}`);
   }, []);
 
+  mqttClient.on('message', (topic, message) => {
+    const value = message.toString();
+    switch (topic) {
+      case '/temperature':
+        setTemperature(parseInt(value, 10));
+        break;
+      case '/humidity':
+        setHumidity(parseInt(value, 10));
+        break;
+      case '/air':
+        if (Number(value) < 0.33) setAir('Ruim');
+        else if (Number(value) > 0.66) setAir('Ruim');
+        else setAir('Bom');
+        break;
+      case '/light':
+        setLightStatus(value === '1');
+        break;
+      case '/window':
+        setWindowValue(parseInt(value, 10));
+        break;
+      default:
+        break;
+    }
+    mqttClient.removeAllListeners();
+  });
+
   useEffect(() => {
+    mqttClient.setMaxListeners(20);
     api.get('/temperature').then((response) => {
       if (response.data)
         setTemperature(Number(Number(response.data).toFixed(1)));
@@ -75,9 +80,7 @@ const Dashboard: React.FC = () => {
     });
     api.get('/window').then((response) => {
       if (response.data) setWindowValue(parseInt(response.data, 10));
-      if (windowSlider) {
-        windowSlider.value = windowValue.toString();
-      }
+      if (windowSlider) windowSlider.value = windowValue.toString();
     });
   }, [windowSlider, windowValue]);
 
@@ -94,9 +97,7 @@ const Dashboard: React.FC = () => {
             </div>
             <div id="data">
               <div id="info">
-                <strong>
-{' '}
-{temperature}°</strong>
+                <strong> {temperature}°</strong>
                 <p>Temperatura</p>
               </div>
             </div>
@@ -107,9 +108,7 @@ const Dashboard: React.FC = () => {
             </div>
             <div id="data">
               <div id="info">
-                <strong>
-{' '}
-{humidity}%</strong>
+                <strong> {humidity}%</strong>
                 <p>Umidade</p>
               </div>
             </div>

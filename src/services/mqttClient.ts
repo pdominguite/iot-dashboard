@@ -1,7 +1,10 @@
 import mqtt from 'mqtt';
 
+const username = '09f3b188';
+const password = '879abfcbf91337ee';
+
 const mqttClient = mqtt.connect(
-  'wss://09f3b188:879abfcbf91337ee@broker.shiftr.io',
+  `wss://${username}:${password}@broker.shiftr.io`,
   { clientId: 'dashboard' },
 );
 
