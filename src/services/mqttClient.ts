@@ -1,7 +1,7 @@
 import mqtt from 'mqtt';
 
 const mqttClient = mqtt.connect(
-  'mqtt://09f3b188:879abfcbf91337ee@broker.shiftr.io',
+  'wss://09f3b188:879abfcbf91337ee@broker.shiftr.io',
   { clientId: 'dashboard' },
 );
 
