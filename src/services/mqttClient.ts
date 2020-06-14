@@ -9,8 +9,6 @@ const mqttClient = mqtt.connect(
 );
 
 mqttClient.on('connect', () => {
-  console.log(username);
-  console.log(password);
   mqttClient.subscribe('/temperature');
   mqttClient.subscribe('/humidity');
   mqttClient.subscribe('/window');
