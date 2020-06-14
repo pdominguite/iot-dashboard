@@ -33,34 +33,38 @@ const Dashboard: React.FC = () => {
     mqttClient.publish('/window', `${Number(windowLevel)}`);
   }, []);
 
-  mqttClient.on('message', (topic, message) => {
-    const value = message.toString();
-    switch (topic) {
-      case '/temperature':
-        setTemperature(parseInt(value, 10));
-        break;
-      case '/humidity':
-        setHumidity(parseInt(value, 10));
-        break;
-      case '/air':
-        if (Number(value) < 0.33) setAir('Ruim');
-        else if (Number(value) > 0.66) setAir('Ruim');
-        else setAir('Bom');
-        break;
-      case '/light':
-        setLightStatus(value === '1');
-        break;
-      case '/window':
-        setWindowValue(parseInt(value, 10));
-        break;
-      default:
-        break;
-    }
-    mqttClient.removeAllListeners();
-  });
+  const openDoorHandler = useCallback(async (e) => {
+    mqttClient.publish('/door', '1');
+  }, []);
 
   useEffect(() => {
-    mqttClient.setMaxListeners(20);
+    const handleNewMessage = (topic: string, message: Buffer): void => {
+      const value = message.toString();
+      switch (topic) {
+        case '/temperature':
+          setTemperature(Number(Number(value).toFixed(1)));
+          break;
+        case '/humidity':
+          setHumidity(parseInt(value, 10));
+          break;
+        case '/air':
+          if (Number(value) < 0.33) setAir('Ruim');
+          else if (Number(value) > 0.66) setAir('Ruim');
+          else setAir('Bom');
+          break;
+        case '/light':
+          setLightStatus(value === '1');
+          break;
+        case '/window':
+          setWindowValue(parseInt(value, 10));
+          if (windowSlider) windowSlider.value = value;
+          break;
+        default:
+          break;
+      }
+    };
+    mqttClient.on('message', handleNewMessage);
+
     api.get('/temperature').then((response) => {
       if (response.data)
         setTemperature(Number(Number(response.data).toFixed(1)));
@@ -82,7 +86,7 @@ const Dashboard: React.FC = () => {
       if (response.data) setWindowValue(parseInt(response.data, 10));
       if (windowSlider) windowSlider.value = windowValue.toString();
     });
-  }, [windowSlider, windowValue]);
+  }, [windowValue, windowSlider]);
 
   return (
     <Container>
@@ -127,7 +131,7 @@ const Dashboard: React.FC = () => {
         </Control>
 
         <Control>
-          <button type="submit" id="door">
+          <button type="submit" id="door" onClick={openDoorHandler}>
             <RiDoorLockBoxLine size={50} />
           </button>
           <div>
