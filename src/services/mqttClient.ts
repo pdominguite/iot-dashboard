@@ -1,7 +1,7 @@
 import mqtt from 'mqtt';
 
-const username = process.env.BROKER_USERNAME;
-const password = process.env.BROKER_PASSWORD;
+const username = process.env.REACT_APP_BROKER_USERNAME;
+const password = process.env.REACT_APP_BROKER_PASSWORD;
 
 const mqttClient = mqtt.connect(
   `wss://${username}:${password}@broker.shiftr.io`,
