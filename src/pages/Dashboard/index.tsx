@@ -131,10 +131,14 @@ const Dashboard: React.FC = () => {
         </Control>
 
         <Control>
-          <button type="submit" id="door" onClick={openDoorHandler}>
-            <RiDoorLockBoxLine size={50} />
-          </button>
-          <div>
+          <section>
+            <button type="submit" id="door" onClick={openDoorHandler}>
+              <RiDoorLockBoxLine size={50} />
+            </button>
+            <p>Fechadura</p>
+          </section>
+
+          <section>
             <ToggleButton
               value="check"
               disableRipple
@@ -143,19 +147,23 @@ const Dashboard: React.FC = () => {
             >
               <GoLightBulb size={50} />
             </ToggleButton>
-          </div>
-          <Slider>
-            <input
-              id="windowSlider"
-              type="range"
-              min="0"
-              max="100"
-              step="10"
-              className="slider"
-              defaultValue={windowValue}
-              onMouseUp={dragHandler}
-            />
-          </Slider>
+            <p>Luzes da Sala</p>
+          </section>
+          <section>
+            <Slider>
+              <input
+                id="windowSlider"
+                type="range"
+                min="0"
+                max="100"
+                step="10"
+                className="slider"
+                defaultValue={windowValue}
+                onMouseUp={dragHandler}
+              />
+            </Slider>
+            <p>Controle de Cortinas</p>
+          </section>
         </Control>
       </Panel>
     </Container>

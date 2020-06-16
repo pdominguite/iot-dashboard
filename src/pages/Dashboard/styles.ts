@@ -39,11 +39,23 @@ export const Control = styled.div`
   align-items: center;
   justify-content: center;
 
+  section {
+    display: border;
+
+    p {
+      font-weight: 300;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.8);
+    }
+  }
+
   button {
+    color: #242a75;
+
     height: 200px;
     width: 200px;
 
-    margin: 20px;
+    margin: 20px 20px 10px 20px;
 
     border: 0;
     border-radius: 30px;
@@ -51,16 +63,18 @@ export const Control = styled.div`
 
     transition: background-color 0.3s;
 
+    background: rgba(128, 128, 128, 0.15);
+
     box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
   }
 
   #door:active {
-    background: #e5e5e5;
+    background: rgba(128, 128, 128, 0.15);
     box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.1);
   }
 
   #door:hover {
-    background-color: rgba(128, 128, 128, 0.2);
+    background-color: rgba(93, 191, 212, 0.1);
   }
 
   .MuiToggleButton-root {
@@ -70,14 +84,14 @@ export const Control = styled.div`
     padding: 0;
     border: 0;
 
-    color: #000;
+    color: rgba(0, 0, 0, 0.6);
 
-    background: rgba(128, 128, 128, 0.2);
+    background: rgba(128, 128, 128, 0.15);
     transition: background-color 0.3s;
   }
 
   .MuiToggleButton-root.Mui-selected:hover {
-    background-color: rgba(255, 250, 205, 0.3);
+    background-color: rgba(93, 191, 212, 0.2);
   }
 
   .MuiToggleButton-root:hover {
@@ -85,8 +99,8 @@ export const Control = styled.div`
   }
 
   .MuiToggleButton-root.Mui-selected {
-    color: #000;
-    background-color: rgba(255, 250, 205, 0.3);
+    color: #242a75;
+    background-color: rgba(93, 191, 212, 0.1);
   }
 `;
 
@@ -94,7 +108,7 @@ export const Slider = styled.div`
   height: 200px;
   width: 200px;
 
-  background: #fff;
+  background: rgba(128, 128, 128, 0.08);
 
   display: flex;
   align-items: center;
@@ -102,7 +116,7 @@ export const Slider = styled.div`
 
   border-radius: 30px;
 
-  margin: 20px;
+  margin: 20px 20px 10px 20px;
   padding: 20px;
 
   border-color: transparent;
@@ -114,7 +128,7 @@ export const Slider = styled.div`
     width: 100%;
     height: 60px;
 
-    background: rgba(128, 128, 128, 0.2);
+    background: rgba(128, 128, 128, 0.15);
 
     outline: none;
 
@@ -136,7 +150,7 @@ export const Slider = styled.div`
     height: 60px;
 
     background: url(${Arrow}) no-repeat;
-    background-color: #1974d2;
+    background-color: #242a75;
     background-position: center;
 
     border-radius: 5px;
@@ -149,7 +163,7 @@ export const Slider = styled.div`
     height: 60px;
 
     background: url(${Arrow}) no-repeat;
-    background-color: #1974d2;
+    background-color: #242a75;
     background-position: center;
 
     border-radius: 5px;
@@ -176,7 +190,7 @@ export const Info = styled.div`
 
     color: #fff;
 
-    background: #1974d2;
+    background: #242a75;
 
     border-radius: 10px 0 0 10px;
 
