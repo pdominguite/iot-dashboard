@@ -2,7 +2,37 @@ import styled from 'styled-components';
 
 import Arrow from '../../assets/arrow.svg';
 
+export const Header = styled.header`
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 50px;
+
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+    padding-bottom: 5px;
+
+    color: #a8a8b3;
+    transition: color 0.2s;
+
+    &:hover {
+      svg {
+        color: #242a75;
+      }
+    }
+    svg {
+      margin-right: 5px;
+    }
+  }
+`;
+
 export const Container = styled.div`
+  height: 100%;
   max-width: 900px;
 
   #logo {
@@ -13,6 +43,45 @@ export const Container = styled.div`
     img {
       width: 500px;
       margin-bottom: 30px;
+    }
+  }
+
+  form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 50px;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+
+      width: 200px;
+
+      font-size: 20px;
+      font-weight: 300;
+
+      border: 0;
+
+      color: #fff;
+      background: #242a75;
+
+      border-radius: 5px;
+
+      box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: rgba(36, 42, 117, 0.9);
+      }
+
+      svg {
+        margin-right: 10px;
+      }
     }
   }
 `;

@@ -21,7 +21,6 @@ export default createGlobalStyle`
     min-width: 960px;
     min-height: 100vh;
     margin: 0 auto;
-    padding: 40px 0px;
     display: flex;
     align-items: center;
     justify-content: center;

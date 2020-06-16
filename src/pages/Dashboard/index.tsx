@@ -1,16 +1,25 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
-import { FiWind } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+
+import { FiWind, FiChevronLeft } from 'react-icons/fi';
+import { AiOutlineDashboard } from 'react-icons/ai';
 import { FaThermometerHalf } from 'react-icons/fa';
 import { RiDoorLockBoxLine } from 'react-icons/ri';
 import { IoIosWater } from 'react-icons/io';
 import { GoLightBulb } from 'react-icons/go';
 import { ToggleButton } from '@material-ui/lab';
-import { Panel, Control, Container, Info, Slider } from './styles';
+import { Panel, Control, Container, Info, Slider, Header } from './styles';
 import ThalesLogo from '../../assets/logo.png';
 
 import api from '../../services/api';
 import mqttClient from '../../services/mqttClient';
+
+const DETAILED_DASHBOARD = process.env.REACT_APP_DETAILED_DASHBOARD
+  ? process.env.REACT_APP_DETAILED_DASHBOARD
+  : '';
+
+const pageTarget = process.env.REACT_APP_DETAILED_DASHBOARD ? '_blank' : '';
 
 const Dashboard: React.FC = () => {
   const [lightStatus, setLightStatus] = useState(false);
@@ -89,84 +98,98 @@ const Dashboard: React.FC = () => {
   }, [windowValue, windowSlider]);
 
   return (
-    <Container>
-      <div id="logo">
-        <img src={ThalesLogo} alt="Thales" />
-      </div>
-      <Panel>
-        <Control>
-          <Info>
-            <div id="icon">
-              <FaThermometerHalf size={30} />
-            </div>
-            <div id="data">
-              <div id="info">
-                <strong> {temperature}°</strong>
-                <p>Temperatura</p>
+    <>
+      <Container>
+        <Header>
+          <Link to="/">
+            <FiChevronLeft size={20} />
+            Sair
+          </Link>
+        </Header>
+        <div id="logo">
+          <img src={ThalesLogo} alt="Thales" />
+        </div>
+        <Panel>
+          <Control>
+            <Info>
+              <div id="icon">
+                <FaThermometerHalf size={30} />
               </div>
-            </div>
-          </Info>
-          <Info>
-            <div id="icon">
-              <IoIosWater size={30} />
-            </div>
-            <div id="data">
-              <div id="info">
-                <strong> {humidity}%</strong>
-                <p>Umidade</p>
+              <div id="data">
+                <div id="info">
+                  <strong> {temperature}°</strong>
+                  <p>Temperatura</p>
+                </div>
               </div>
-            </div>
-          </Info>
-          <Info>
-            <div id="icon">
-              <FiWind size={30} />
-            </div>
-            <div id="data">
-              <div id="info">
-                <strong>{air}</strong>
-                <p>CO2</p>
+            </Info>
+            <Info>
+              <div id="icon">
+                <IoIosWater size={30} />
               </div>
-            </div>
-          </Info>
-        </Control>
+              <div id="data">
+                <div id="info">
+                  <strong> {humidity}%</strong>
+                  <p>Umidade</p>
+                </div>
+              </div>
+            </Info>
+            <Info>
+              <div id="icon">
+                <FiWind size={30} />
+              </div>
+              <div id="data">
+                <div id="info">
+                  <strong>{air}</strong>
+                  <p>CO2</p>
+                </div>
+              </div>
+            </Info>
+          </Control>
 
-        <Control>
-          <section>
-            <button type="submit" id="door" onClick={openDoorHandler}>
-              <RiDoorLockBoxLine size={50} />
-            </button>
-            <p>Fechadura</p>
-          </section>
+          <Control>
+            <section>
+              <button type="submit" id="door" onClick={openDoorHandler}>
+                <RiDoorLockBoxLine size={50} />
+              </button>
+              <p>Fechadura</p>
+            </section>
 
-          <section>
-            <ToggleButton
-              value="check"
-              disableRipple
-              selected={lightStatus}
-              onChange={clickHandler}
-            >
-              <GoLightBulb size={50} />
-            </ToggleButton>
-            <p>Luzes da Sala</p>
-          </section>
-          <section>
-            <Slider>
-              <input
-                id="windowSlider"
-                type="range"
-                min="0"
-                max="100"
-                step="10"
-                className="slider"
-                defaultValue={windowValue}
-                onMouseUp={dragHandler}
-              />
-            </Slider>
-            <p>Controle de Cortinas</p>
-          </section>
-        </Control>
-      </Panel>
-    </Container>
+            <section>
+              <ToggleButton
+                value="check"
+                disableRipple
+                selected={lightStatus}
+                onChange={clickHandler}
+              >
+                <GoLightBulb size={50} />
+              </ToggleButton>
+              <p>Luzes da Sala</p>
+            </section>
+            <section>
+              <Slider>
+                <input
+                  id="windowSlider"
+                  type="range"
+                  min="0"
+                  max="100"
+                  step="10"
+                  className="slider"
+                  defaultValue={windowValue}
+                  onMouseUp={dragHandler}
+                />
+              </Slider>
+              <p>Controle de Cortinas</p>
+            </section>
+          </Control>
+        </Panel>
+        <form action={DETAILED_DASHBOARD} target={pageTarget}>
+          <button type="submit">
+            <AiOutlineDashboard size={30} />
+            Análises
+          </button>
+        </form>
+      </Container>
+    </>
   );
 };
 
