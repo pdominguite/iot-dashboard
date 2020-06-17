@@ -35,6 +35,8 @@ export const Container = styled.div`
   height: 100%;
   max-width: 900px;
 
+  width: 760px;
+
   #logo {
     display: flex;
     align-items: center;
@@ -59,10 +61,10 @@ export const Container = styled.div`
       align-items: center;
       padding: 10px;
 
-      width: 200px;
+      width: 170px;
 
       font-size: 20px;
-      font-weight: 300;
+      font-weight: 400;
 
       border: 0;
 
@@ -80,7 +82,7 @@ export const Container = styled.div`
       }
 
       svg {
-        margin-right: 10px;
+        margin: 0 10px 0 0;
       }
     }
   }
@@ -100,7 +102,7 @@ export const Panel = styled.div`
 
   border-radius: 10px;
 
-  box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
 `;
 
 export const Control = styled.div`
