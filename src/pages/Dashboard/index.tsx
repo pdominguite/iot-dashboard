@@ -163,7 +163,7 @@ const Dashboard: React.FC = () => {
               >
                 <GoLightBulb size={50} />
               </ToggleButton>
-              <p>Luzes da Sala</p>
+              <p>Luzes</p>
             </section>
             <section>
               <Slider>
@@ -178,7 +178,7 @@ const Dashboard: React.FC = () => {
                   onMouseUp={dragHandler}
                 />
               </Slider>
-              <p>Controle de Cortinas</p>
+              <p>Cortinas</p>
             </section>
           </Control>
         </Panel>
